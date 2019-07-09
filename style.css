@@ -1,0 +1,100 @@
+:root {
+    --primary: #FFFAF0;
+    --operator: #f7a80b;
+}
+
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+font-family: 'Fira Mono', monospace;
+background: #FFFAF0;
+color: var(--primary);
+}
+
+.calculator {
+    background: #5F5E70;
+    font-size: 24px;
+    width: 350px;
+    margin: 70px auto;
+    -webkit-box-shadow: 10px 10px 28px -16px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 28px -16px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 28px -16px rgba(0,0,0,0.75);
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 80px;
+    text-align: center;
+    padding: 10px;
+    /* Disable highligt */
+    user-select: none; /* supported by Chrome and Opera */
+   -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+   -moz-user-select: none; /* Firefox */
+   -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+.btn:hover {
+    background: rgb(79, 79, 85);
+}
+
+.equals:active {
+    filter: saturate(200%);
+}
+
+.btn:active {
+    filter: brightness(1.4);
+}
+
+.result {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 25px;
+    min-height: 120px;
+    border-bottom: 1px solid rgb(176, 176, 179);
+    font-size: 50px;
+    background: rgb(198, 197, 215);
+}
+
+.divison {
+    width: 25%;
+}
+
+.clear {
+    width: 75%;
+}
+
+.zero {
+    width: 50%;
+}
+
+.dot, .equals {
+    width: 25%;
+}
+
+.equals {
+    background: #f0283f;
+}
+
+.equals:hover {
+    background: #ae1f30;
+}
+
+.operators {
+    color: var(--operator);
+}
+
