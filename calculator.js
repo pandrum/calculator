@@ -29,7 +29,7 @@ keys.addEventListener('click', function(e) {
         operatorLastPressed = true;
     }
     else if (value.contains("number"))
-      if (display.textContent == 0 || operatorLastPressed == true) {
+      if (display.textContent === '0' || operatorLastPressed == true) {
         display.textContent = number;
         operatorLastPressed = false;
       } 
@@ -38,9 +38,12 @@ keys.addEventListener('click', function(e) {
       }
     else if (value.contains("clear")) {
       display.textContent = 0;
+      firstValue = 0;
     } 
     else if (value.contains("dot")) {
-      console.log("dot");
+        if (!display.textContent.includes('.')) {
+            display.textContent = display.textContent + '.';
+        }
     } 
     else if (value.contains("equal")) {
       calculate();
@@ -50,20 +53,27 @@ keys.addEventListener('click', function(e) {
 function calculate() {
     switch (operator) {
         case "plus":
-            result = parseFloat(firstValue) + parseFloat(display.textContent)
-            display.textContent = result;
-            break;
+                result = parseFloat(firstValue) + parseFloat(display.textContent)
+                display.textContent = limitDecimal(result);
+                break;
+
         case "minus":
-            result = parseFloat(firstValue) - parseFloat(display.textContent)
-            display.textContent = result;
-            break;
+                result = parseFloat(firstValue) - parseFloat(display.textContent)
+                display.textContent = limitDecimal(result);
+                break;
+
         case "multiplie":
-            result = parseFloat(firstValue) * parseFloat(display.textContent)
-            display.textContent = result;
-            break;
+                result = parseFloat(firstValue) * parseFloat(display.textContent)
+                display.textContent = limitDecimal(result);
+                break;
+
         case "division":
-            result = parseFloat(firstValue) / parseFloat(display.textContent)
-            display.textContent = result;
-            break;
+                result = parseFloat(firstValue) / parseFloat(display.textContent);
+                display.textContent = limitDecimal(result);
+                break;
     }
+}
+
+function limitDecimal(num) {
+    return num.toFixed(2);
 }
