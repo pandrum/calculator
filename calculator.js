@@ -1,50 +1,69 @@
 const keys = document.querySelector('.calculator');
-let output = document.getElementById('output').textContent;
-let firstvalue = 0;
+let display = document.getElementById('output');
+let firstValue = '';
 let operator = '';
-let operatorPressed = false;
+let operatorLastPressed = false;
 
 keys.addEventListener('click', function(e) {
-    let action = e.target.classList;
+    let value = e.target.classList;
+    let number = e.target.textContent;
 
-    if (action.contains("division")) {
-
+    if (value.contains("plus")) {
+        firstValue = display.textContent;
+        operator = "plus";
+        operatorLastPressed = true;
     }
-    else if (action.contains("multiplie")) {
-
+    else if (value.contains("minus")) {
+        firstValue = display.textContent;
+        operator = "minus";
+        operatorLastPressed = true;
     }
-    else if (action.contains("minus")) {
-
+    else if (value.contains("multiplie")) {
+        firstValue = display.textContent;
+        operator = "multiplie";
+        operatorLastPressed = true;
     }
-    else if (action.contains("plus")) {
-        firstvalue = output.textContent;
-        operator = 'plus';
-        operatorPressed = true;
+    else if (value.contains('division')) {
+        firstValue = display.textContent;
+        operator = "division";
+        operatorLastPressed = true;
     }
-    else if (action.contains('equals')) {
-
-    }
-    else if (action.contains('clear')) {
-        clearDisplay();
-    }
-    else if (action.contains('dot')) {
-        if (output.textContent.indexOf(".") !== -1) {
-            return
-        }
-        else {
-            output.textContent = output.textContent + ".";
-        }
-    }
-    else if (action.contains('number')) {
-        if (output.textContent === '0') {
-            output.textContent = e.target.textContent;
-        }
-        else {
-            output.textContent += e.target.textContent;
-        }
+    else if (value.contains("number"))
+      if (display.textContent == 0 || operatorLastPressed == true) {
+        display.textContent = number;
+        operatorLastPressed = false;
+      } 
+      else {
+        display.textContent += number;
+      }
+    else if (value.contains("clear")) {
+      display.textContent = 0;
+    } 
+    else if (value.contains("dot")) {
+      console.log("dot");
+    } 
+    else if (value.contains("equal")) {
+      calculate();
     }
 });
 
-function clearDisplay() {
-    output.textContent = 0;
+function calculate() {
+    switch (operator) {
+        case "plus":
+            result = parseFloat(firstValue) + parseFloat(display.textContent)
+            display.textContent = result;
+            break;
+        case "minus":
+            result = parseFloat(firstValue) - parseFloat(display.textContent)
+            display.textContent = result;
+            break;
+        case "multiplie":
+            result = parseFloat(firstValue) * parseFloat(display.textContent)
+            display.textContent = result;
+            break;
+        case "division":
+            result = parseFloat(firstValue) / parseFloat(display.textContent)
+            display.textContent = result;
+            break;
+    }
 }

@@ -1,6 +1,6 @@
 :root {
-    --primary: rgb(250, 237, 220);
-    --operator: #f7a80b;
+    --primary: rgb(255, 236, 212);
+    --operator: #ffbd38;
 }
 
 * {
@@ -81,15 +81,15 @@ color: var(--primary);
     width: 50%;
 }
 
-.dot, .equals {
+.dot, .equal {
     width: 25%;
 }
 
-.equals {
+.equal {
     background: #f0283f;
 }
 
-.equals:hover {
+.equal:hover {
     background: #ae1f30;
 }
 
