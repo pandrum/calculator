@@ -1,5 +1,5 @@
 :root {
-    --primary: rgb(255, 236, 212);
+    --primary: rgb(255, 230, 200);
     --operator: #ffbd38;
 }
 
@@ -95,5 +95,9 @@ color: var(--primary);
 
 .operators {
     color: var(--operator);
+}
+
+.depressed {
+    background: rgb(61, 60, 72);
 }
 

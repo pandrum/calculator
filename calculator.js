@@ -1,13 +1,20 @@
 const keys = document.querySelector('.calculator');
 let display = document.getElementById('output');
 let firstValue = '';
+let secondValue = '';
+let modValue = '';
 let operator = '';
 let operatorLastPressed = false;
+let equalLastPressed = false;
 
-keys.addEventListener('click', function(e) {
+
+keys.addEventListener('click', (e) => {
     let value = e.target.classList;
     let number = e.target.textContent;
 
+    if (e.target.classList.contains("operators") && operatorLastPressed === false) {
+      e.target.classList.add("depressed");
+    }
     if (value.contains("plus")) {
         firstValue = display.textContent;
         operator = "plus";
@@ -29,9 +36,11 @@ keys.addEventListener('click', function(e) {
         operatorLastPressed = true;
     }
     else if (value.contains("number"))
-      if (display.textContent === '0' || operatorLastPressed == true) {
-        display.textContent = number;
-        operatorLastPressed = false;
+      if (display.textContent === '0' || operatorLastPressed == true || equalLastPressed == true) {
+          operatorLastPressed = false;
+          equalLastPressed = false;
+          display.textContent = number;
+          removeDepressedState();
       } 
       else {
         display.textContent += number;
@@ -46,6 +55,8 @@ keys.addEventListener('click', function(e) {
         }
     } 
     else if (value.contains("equal")) {
+      operatorLastPressed = false;
+      equalLastPressed = true;
       calculate();
     }
 });
@@ -53,27 +64,36 @@ keys.addEventListener('click', function(e) {
 function calculate() {
     switch (operator) {
         case "plus":
-                result = parseFloat(firstValue) + parseFloat(display.textContent)
-                display.textContent = limitDecimal(result);
+                result = parseFloat(firstValue) + parseFloat(display.textContent);
+                display.textContent = result;
                 break;
 
-        case "minus":
-                result = parseFloat(firstValue) - parseFloat(display.textContent)
-                display.textContent = limitDecimal(result);
+        case "minus":  
+                secondValue = display.textContent;
+                result = parseFloat(firstValue) - parseFloat(display.textContent);
+                display.textContent = result;
+                firstValue = display.textContent;
+                console.log(result);
+                console.log(firstValue);
+                console.log(secondValue);
                 break;
 
         case "multiplie":
-                result = parseFloat(firstValue) * parseFloat(display.textContent)
-                display.textContent = limitDecimal(result);
+                result = parseFloat(firstValue) * parseFloat(display.textContent);
+                display.textContent = result;
                 break;
 
         case "division":
                 result = parseFloat(firstValue) / parseFloat(display.textContent);
-                display.textContent = limitDecimal(result);
+                display.textContent = result;
                 break;
     }
 }
 
-function limitDecimal(num) {
-    return num.toFixed(2);
+
+function removeDepressedState() {
+    let operators = document.querySelectorAll(".operators");
+    operators.forEach(function(operator) {
+      operator.classList.remove("depressed");
+    });
 }
